@@ -1,9 +1,7 @@
-function makeStockArray() {
-  return [
-    {
-      symbol: "AAPL",
-      stock_values: [
-        {
+INSERT INTO locksley_stocks (symbol, stock_values)
+VALUES (
+        'AAPL',
+        [{
           date_info: "2021-06-04",
           price_open: "124.04000",
           price_high: "125.36000",
@@ -42,12 +40,5 @@ function makeStockArray() {
           price_low: "124.55000",
           price_close: "124.61000",
           volume: "71232700",
-        },
-      ],
-    },
-  ];
-}
-
-module.exports = {
-  makeStockArray,
-};
+        }]
+    )
