@@ -47,3 +47,7 @@ function makeStockArray() {
     },
   ];
 }
+
+module.exports = {
+  makeStockArray,
+};
