@@ -2,6 +2,7 @@ function makeStockArray() {
   return [
     {
       id: 1,
+      symbol: "AAPL",
       date_info: "2021-06-04",
       price_open: "124.04000",
       price_high: "125.36000",
@@ -11,6 +12,7 @@ function makeStockArray() {
     },
     {
       id: 2,
+      symbol: "AAPL",
       date_info: "2021-06-03",
       price_open: "124.68000",
       price_high: "124.85000",
@@ -20,6 +22,7 @@ function makeStockArray() {
     },
     {
       id: 3,
+      symbol: "AAPL",
       date_info: "2021-06-02",
       price_open: "124.28800",
       price_high: "125.24000",
@@ -29,6 +32,7 @@ function makeStockArray() {
     },
     {
       id: 4,
+      symbol: "AAPL",
       date_info: "2021-06-01",
       price_open: "125.08000",
       price_high: "125.35000",
@@ -38,6 +42,7 @@ function makeStockArray() {
     },
     {
       id: 5,
+      symbol: "AAPL",
       date_info: "2021-05-28",
       price_open: "125.57000",
       price_high: "125.80000",
