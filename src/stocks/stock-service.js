@@ -15,8 +15,8 @@ const StockService = {
 
   getBySymbol(knex, symbol) {
     return knex
-      .from("locksley_stocks")
       .select("*")
+      .from("locksley_stocks")
       .where("stock_symbol", symbol);
   },
 
