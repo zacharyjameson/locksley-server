@@ -13,12 +13,12 @@ const StockService = {
       });
   },
 
-  getById(knex, id) {
-    return knex.from("moviedex_movies").select("*").where("id", id).first();
+  getBySymbol(knex, stock_symbol) {
+    return knex.raw(`SELECT * FROM locksley_stocks WHERE stock_symbol='${stock_symbol}`);
   },
 
-  deleteStock(knex, id) {
-    return knex("locksley_stocks").where({ id }).delete();
+  deleteStock(knex, stock_symbol) {
+    return knex("locksley_stocks").where({ stock_symbol }).delete();
   },
 
   clearAllStocks(knex) {

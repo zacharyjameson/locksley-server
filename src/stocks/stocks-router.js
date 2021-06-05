@@ -8,8 +8,13 @@ const jsonParser = express.json();
 
 const serializeStock = (stock) => ({
   id: stock.id,
-  symbol: stock.symbol,
-  stock_values: stock.stock_values,
+  stock_symbol: stock.stock_symbol,
+  date_info: stock.date_info,
+  price_open: stock.price_open,
+  price_high: stock.price_high,
+  price_low: stock.price_low,
+  price_close: stock.price_close,
+  stock_volume: stock.stock_volume,
 });
 
 stockRouter
@@ -23,8 +28,8 @@ stockRouter
             .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
-        const { symbol, stock_values } = req.body;
-        const newStock = { symbol, stock_values };
+        const { stock_symbol, stock_volume, date_info, price_close, price_high, price_low, price_open } = req.body;
+        const newStock = { stock_symbol, stock_volume, date_info, price_close, price_high, price_low, price_open};
 
         for(const [key, value] of Object.entries(newStock)) {
             if(!value) {
@@ -38,7 +43,7 @@ stockRouter
             .then((stock) => {
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalUrl, `/${stock.symbol}`))
+                    .location(path.posix.join(req.originalUrl, `/${stock.stock_symbol}`))
                     .json(serializeStock(stock));
             })
             .catch(next);
@@ -51,10 +56,10 @@ stockRouter
     });
 
     stockRouter
-        .route("/:stock_id")
+        .route("/:stock_symbol")
         .all((req, res, next) => {
             const knexInstance = req.app.get("db");
-            StockService.getById(knexInstance, req.params.stock_id)
+            StockService.getBySymbol(knexInstance, req.params.stock_symbol)
                 .then((stock) => {
                     if(!stock){
                         return res.status(404).json({
@@ -71,7 +76,7 @@ stockRouter
         })
         .delete((req, res, next) => {
             const knexInstance = req.app.get("db");
-            StockService.deleteStock(knexInstance, req.params.stock_id)
+            StockService.deleteStock(knexInstance, req.params.stock_symbol)
                 .then((numRowsAffected) => {
                     res.status(204).end();
                 })
