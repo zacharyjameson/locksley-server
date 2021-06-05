@@ -13,8 +13,11 @@ const StockService = {
       });
   },
 
-  getBySymbol(knex, stock_symbol) {
-    return knex.raw(`SELECT * FROM locksley_stocks WHERE stock_symbol='${stock_symbol}`);
+  getBySymbol(knex, symbol) {
+    return knex
+      .from("locksley_stocks")
+      .select("*")
+      .where("stock_symbol", symbol);
   },
 
   deleteStock(knex, stock_symbol) {
