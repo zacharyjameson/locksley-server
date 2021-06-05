@@ -66,7 +66,7 @@ stockRouter
                             error: { message: `Stock doesn't exist` },
                         });
                     }
-                    res.stock = { stock };
+                    res.stock = stock;
                     next();
                 })
                 .catch(next);
