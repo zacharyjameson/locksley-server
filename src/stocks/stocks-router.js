@@ -76,13 +76,13 @@ stockRouter
   .all((req, res, next) => {
     const knexInstance = req.app.get("db");
     StockService.getBySymbol(knexInstance, req.params.stock_symbol)
-      .then((stocks) => {
-        if (!stocks) {
+      .then((stock) => {
+        if (!stock) {
           return res.status(404).json({
             error: { message: `Stock doesn't exist` },
           });
         } else {
-          res.json(stocks.map(serializeStock));
+          res.json(stock.map(serializeStock));
         }
       })
 
