@@ -32,7 +32,7 @@ function makeStockArray() {
     },
     {
       id: 4,
-      stock_symbol: "AAPL",
+      stock_symbol: "MSFT",
       stock_volume: "67637118",
       date_info: "2021-06-01",
       price_open: "125.08000",
@@ -42,7 +42,7 @@ function makeStockArray() {
     },
     {
       id: 5,
-      stock_symbol: "AAPL",
+      stock_symbol: "MSFT",
       stock_volume: "71232700",
       date_info: "2021-05-28",
       price_open: "125.57000",

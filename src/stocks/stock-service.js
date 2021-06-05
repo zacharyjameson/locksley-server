@@ -21,11 +21,11 @@ const StockService = {
   },
 
   deleteStock(knex, stock_symbol) {
-    return knex("locksley_stocks").where({ stock_symbol }).delete();
+    return knex("locksley_stocks").where("stock_symbol", stock_symbol).delete();
   },
 
   clearAllStocks(knex) {
-    return knex.raw("TRUNATE TABLE locksley_stocks RESTART IDENTITY CASCADE");
+    return knex.raw("TRUNCATE TABLE locksley_stocks RESTART IDENTITY CASCADE");
   },
 };
 

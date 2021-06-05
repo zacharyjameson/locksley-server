@@ -77,7 +77,7 @@ stockRouter
     const knexInstance = req.app.get("db");
     StockService.getBySymbol(knexInstance, req.params.stock_symbol)
       .then((stock) => {
-        if (!stock) {
+        if (stock.length === 0) {
           return res.status(404).json({
             error: { message: `Stock doesn't exist` },
           });

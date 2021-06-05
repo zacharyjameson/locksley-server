@@ -43,7 +43,6 @@ describe("Stocks Endpoints", () => {
         return supertest(app).get("/api/stocks").expect(200, testStocks);
       });
     });
-
   });
 
   describe("POST /api/stocks", () => {
@@ -74,7 +73,15 @@ describe("Stocks Endpoints", () => {
         });
     });
 
-    const requiredFields = ["stock_symbol", "stock_volume", "date_info", "price_open", "price_high", "price_low", "price_close"];
+    const requiredFields = [
+      "stock_symbol",
+      "stock_volume",
+      "date_info",
+      "price_open",
+      "price_high",
+      "price_low",
+      "price_close",
+    ];
 
     requiredFields.forEach((field) => {
       const newStocks = {
@@ -84,7 +91,7 @@ describe("Stocks Endpoints", () => {
         price_open: "248.00",
         price_high: "252.54",
         price_low: "250.62",
-        price_close: "251.15"
+        price_close: "251.15",
       };
 
       it(`responds with 400 and an error when the ${field} is missing`, () => {
@@ -100,5 +107,37 @@ describe("Stocks Endpoints", () => {
     });
   });
 
+  describe(`DELETE /api/stocks/:stock_symbol`, () => {
+    context(`Given no stocks in the database`, () => {
+      it(`it responds with 404`, () => {
+        const stockSymbol = 123456;
 
+        return supertest(app)
+          .delete(`/api/stocks/${stockSymbol}`)
+          .expect(404, { error: { message: `Stock doesn't exist` } });
+      });
+    });
+
+    context(`Given there are stocks in the database`, () => {
+      const testStocks = makeStockArray();
+
+      beforeEach("insert stocks", () => {
+        return db.into("locksley_stocks").insert(testStocks);
+      });
+
+      it(`responds with 204 and then removes the stock`, () => {
+        const stockToRemove = "MSFT";
+        const expectedStock = testStocks.filter(
+          (stock) => stock.stock_symbol !== stockToRemove
+        );
+
+        return supertest(app)
+          .delete(`/api/stocks/${stockToRemove}`)
+          .expect(204)
+          .then((res) => {
+            supertest(app).get("/api/stocks").expect(expectedStock);
+          });
+      });
+    });
+  });
 });
