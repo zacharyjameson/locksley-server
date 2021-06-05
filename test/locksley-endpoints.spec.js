@@ -49,19 +49,18 @@ describe("Stocks Endpoints", () => {
     it(`adds a new stock to the database`, () => {
       const newStock = {
         symbol: "AAPL",
-        stock_values: [
-          {
-            date_info: "2021-06-04",
-            price_open: "124.04000",
-            price_high: "125.36000",
-            price_low: "123.85000",
-            price_close: "124.92000",
-            volume: "18013682",
-          },
-        ],
+        date_info: "2021-06-04",
+        price_open: "124.04000",
+        price_high: "125.36000",
+        price_low: "123.85000",
+        price_close: "124.92000",
+        volume: "18013682",
       };
 
-      return supertest(app).post("/api/stocks").send(newStock);
-    });
-  });
+      return supertest(app)
+        .post("/api/stocks")
+        .send(newStock)
+
+    })
+  })
 });
