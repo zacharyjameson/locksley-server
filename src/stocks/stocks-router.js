@@ -95,7 +95,6 @@ stockRouter
     const knexInstance = req.app.get("db");
     StockService.deleteStock(knexInstance, req.params.stock_symbol)
       .then((numRowsAffected) => {
-          console.log(req.params.stock_symbol)
         res.status(204).end();
       })
       .catch(next);

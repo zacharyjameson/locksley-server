@@ -21,7 +21,9 @@ const StockService = {
   },
 
   deleteStock(knex, symbol) {
-    return knex.raw(`DELETE FROM locksley_stocks WHERE stock_symbol='${symbol}'`);
+    return knex("locksley_stocks")
+      .where({ symbol })
+      .delete();
   },
 
   clearAllStocks(knex) {
