@@ -15,13 +15,13 @@ const StockService = {
 
   getBySymbol(knex, symbol) {
     return knex
-      .select("*")
       .from("locksley_stocks")
+      .select("*")
       .where("stock_symbol", symbol);
   },
 
   deleteStock(knex, symbol) {
-    return knex.raw(`DELETE * FROM locksley_stocks WHERE stock_symbol='${symbol}'`);
+    return knex.raw(`DELETE FROM locksley_stocks WHERE stock_symbol='${symbol}'`);
   },
 
   clearAllStocks(knex) {

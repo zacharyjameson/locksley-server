@@ -9,12 +9,12 @@ const jsonParser = express.json();
 const serializeStock = (stock) => ({
   id: stock.id,
   stock_symbol: stock.stock_symbol,
+  stock_volume: stock.stock_volume,
   date_info: stock.date_info,
   price_open: stock.price_open,
   price_high: stock.price_high,
   price_low: stock.price_low,
   price_close: stock.price_close,
-  stock_volume: stock.stock_volume,
 });
 
 stockRouter
@@ -95,6 +95,7 @@ stockRouter
     const knexInstance = req.app.get("db");
     StockService.deleteStock(knexInstance, req.params.stock_symbol)
       .then((numRowsAffected) => {
+          console.log(req.params.stock_symbol)
         res.status(204).end();
       })
       .catch(next);
