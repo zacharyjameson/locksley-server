@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use("/api/stocks", stockRouter);
 app.get("/", (req, res) => {
-  res.send("Hello, world!");
+  res.send("Hello there....General Kenobi!");
 });
 
 app.use(errorHandler);

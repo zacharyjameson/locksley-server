@@ -20,10 +20,10 @@ const StockService = {
       .where("stock_symbol", symbol);
   },
 
-  deleteStock(knex, symbol) {
-    return knex("locksley_stocks")
-      .where({ symbol })
-      .delete();
+  deleteStock(knex, stockSymbol) {
+    return knex.raw(
+      `DELETE FROM locksley_stocks WHERE stock_symbol='${stockSymbol}'`
+    );
   },
 
   clearAllStocks(knex) {
