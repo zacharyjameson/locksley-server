@@ -107,7 +107,7 @@ describe("Stocks Endpoints", () => {
     });
   });
 
-  describe.only(`DELETE /api/stocks/:stock_symbol`, () => {
+  describe(`DELETE /api/stocks/:stock_symbol`, () => {
     context(`Given no stocks in the database`, () => {
       it(`it responds with 404`, () => {
         const stockSymbol = 123456;
