@@ -92,14 +92,17 @@ stockRouter
     const knexInstance = req.app.get("db");
     StockService.deleteStock(knexInstance, req.params.stock_symbol)
       .then((numRowsAffected) => {
-        res.status(204).end();
+        if (!numRowsAffected) {
+          return res.status(404).json({
+            error: { message: `Stock doesn't exist` },
+          });
+        } else {
+          return res.status(204).end();
+        }
       })
       .catch(next);
   });
 
-
-  stockRouter
-    .route('/delete/:stock_symbol')
-    
+stockRouter.route("/delete/:stock_symbol");
 
 module.exports = stockRouter;
