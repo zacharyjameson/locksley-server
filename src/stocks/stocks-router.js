@@ -73,7 +73,7 @@ stockRouter
 
 stockRouter
   .route("/:stock_symbol")
-  .all((req, res, next) => {
+  .get((req, res, next) => {
     const knexInstance = req.app.get("db");
     StockService.getBySymbol(knexInstance, req.params.stock_symbol)
       .then((stock) => {
@@ -88,9 +88,6 @@ stockRouter
 
       .catch(next);
   })
-  .get((req, res, next) => {
-    res.json(serializeStock(res.stock));
-  })
   .delete((req, res, next) => {
     const knexInstance = req.app.get("db");
     StockService.deleteStock(knexInstance, req.params.stock_symbol)
@@ -99,5 +96,10 @@ stockRouter
       })
       .catch(next);
   });
+
+
+  stockRouter
+    .route('/delete/:stock_symbol')
+    
 
 module.exports = stockRouter;
