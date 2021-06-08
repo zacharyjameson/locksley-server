@@ -49,11 +49,7 @@ describe("Stocks Endpoints", () => {
     it(`adds a new stock to the database`, () => {
       const newStock = {
         stock_symbol: "AAPL",
-        stock_volume: "18013682",
         date_info: "2021-06-04",
-        price_open: "124.04000",
-        price_high: "125.36000",
-        price_low: "123.85000",
         price_close: "124.92000",
       };
 
@@ -63,11 +59,7 @@ describe("Stocks Endpoints", () => {
         .expect(201)
         .expect((res) => {
           expect(res.body.stock_symbol).to.eql(newStock.stock_symbol);
-          expect(res.body.stock_volume).to.eql(newStock.stock_volume);
           expect(res.body.date_info).to.eql(newStock.date_info);
-          expect(res.body.price_open).to.eql(newStock.price_open);
-          expect(res.body.price_high).to.eql(newStock.price_high);
-          expect(res.body.price_low).to.eql(newStock.price_low);
           expect(res.body.price_close).to.eql(newStock.price_close);
           expect(res.body).to.have.property("id");
         });
@@ -75,22 +67,14 @@ describe("Stocks Endpoints", () => {
 
     const requiredFields = [
       "stock_symbol",
-      "stock_volume",
       "date_info",
-      "price_open",
-      "price_high",
-      "price_low",
       "price_close",
     ];
 
     requiredFields.forEach((field) => {
       const newStocks = {
         stock_symbol: "MSFT",
-        stock_volume: "9237323",
         date_info: "2021-05-06",
-        price_open: "248.00",
-        price_high: "252.54",
-        price_low: "250.62",
         price_close: "251.15",
       };
 
