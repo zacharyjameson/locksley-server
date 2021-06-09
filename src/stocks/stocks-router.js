@@ -9,8 +9,7 @@ const jsonParser = express.json();
 const serializeStock = (stock) => ({
   id: stock.id,
   stock_symbol: stock.stock_symbol,
-  date_info: stock.date_info,
-  price_close: stock.price_close,
+  stock_values: stock.stock_values,
 });
 
 stockRouter
@@ -24,15 +23,10 @@ stockRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const {
-      stock_symbol,
-      date_info,
-      price_close,
-    } = req.body;
+    const { stock_symbol, stock_values } = req.body;
     const newStock = {
       stock_symbol,
-      date_info,
-      price_close,
+      stock_values,
     };
 
     for (const [key, value] of Object.entries(newStock)) {
