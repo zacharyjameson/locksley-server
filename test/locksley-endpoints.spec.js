@@ -36,7 +36,6 @@ describe("Stocks Endpoints", () => {
       const testStocks = makeStockArray();
 
       beforeEach("insert stock", () => {
-        console.log(testStocks);
         return db.into("locksley_stocks").insert(testStocks);
       });
 
