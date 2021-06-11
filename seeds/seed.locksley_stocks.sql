@@ -1,60 +1,22 @@
-INSERT INTO locksley_stocks (stock_symbol, stock_values)
+INSERT INTO locksley_stocks (
+        stock_symbol,
+        stock_name,
+        stock_volume,
+        stock_previous_close,
+        stock_percent_change,
+        stock_close,
+        stock_open,
+        fiftytwo_week_high,
+        fiftytwo_week_low
+    )
 VALUES (
-        'AAPL',
-        '[{
-            "datetime": "2021-06-07",
-            "open": "422.58200",
-            "high": "422.78000",
-            "low": "421.19000",
-            "close": "422.26001",
-            "volume": "41816890"
-        },
-        {
-            "datetime": "2021-06-04",
-            "open": "418.76999",
-            "high": "422.92001",
-            "low": "418.76999",
-            "close": "422.44000",
-            "volume": "47128808"
-        },
-        {
-            "datetime": "2021-06-03",
-            "open": "417.87329",
-            "high": "419.98999",
-            "low": "416.28000",
-            "close": "418.81000",
-            "volume": "54024375"
-        },
-        {
-            "datetime": "2021-06-02",
-            "open": "420.35999",
-            "high": "421.22000",
-            "low": "419.29501",
-            "close": "420.35999",
-            "volume": "41889166"
-        },
-        {
-            "datetime": "2021-06-01",
-            "open": "422.56000",
-            "high": "422.72000",
-            "low": "419.20001",
-            "close": "419.63000",
-            "volume": "49022824"
-        },
-        {
-            "datetime": "2021-05-28",
-            "open": "420.96210",
-            "high": "421.25000",
-            "low": "419.79001",
-            "close": "420.04001",
-            "volume": "50554335"
-        },
-        {
-            "datetime": "2021-05-27",
-            "open": "420.17209",
-            "high": "420.72000",
-            "low": "419.12000",
-            "close": "419.22000",
-            "volume": "50645184"
-        }
-    ]');
+        'MSFT',
+        'Microsoft Corp',
+        '102844861',
+        '250.78999',
+        '2.63963',
+        '257.40991',
+        '249.98000',
+        '263.19000',
+        '184.00999'
+    );
