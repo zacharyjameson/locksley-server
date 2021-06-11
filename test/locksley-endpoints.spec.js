@@ -25,7 +25,7 @@ describe("Stocks Endpoints", () => {
     db.raw("TRUNCATE locksley_stocks RESTART IDENTITY CASCADE")
   );
 
-  describe.only(`GET /api/stocks`, () => {
+  describe(`GET /api/stocks`, () => {
     context(`Given no stocks`, () => {
       it(`responds with 200 and an empty list`, () => {
         return supertest(app).get("/api/stocks").expect(200, []);
@@ -67,11 +67,23 @@ describe("Stocks Endpoints", () => {
         .expect((res) => {
           expect(res.body.stock_symbol).to.eql(newStock.stock_symbol);
           expect(res.body.stock_name).to.eql(newStock.stock_name);
+          expect(res.body.stock_volume).to.eql(newStock.stock_volume);
+          expect(res.body.stock_open).to.eql(newStock.stock_open);
           expect(res.body).to.have.property("id");
         });
     });
 
-    const requiredFields = ["stock_symbol", "stock_values"];
+    const requiredFields = [
+      "stock_symbol",
+      "stock_name",
+      "stock_volume",
+      "stock_open",
+      "stock_close",
+      "stock_percent_change",
+      "stock_previous_close",
+      "fiftytwo_week_high",
+      "fiftytwo_week_low",
+    ];
 
     requiredFields.forEach((field) => {
       const newStocks = {

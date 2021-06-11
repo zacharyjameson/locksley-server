@@ -9,7 +9,14 @@ const jsonParser = express.json();
 const serializeStock = (stock) => ({
   id: stock.id,
   stock_symbol: stock.stock_symbol,
-  stock_values: stock.stock_values,
+  stock_name: stock.stock_name,
+  stock_volume: stock.stock_volume,
+  stock_previous_close: stock.stock_previous_close,
+  stock_percent_change: stock.stock_percent_change,
+  stock_close: stock.stock_close,
+  stock_open: stock.stock_open,
+  fiftytwo_week_high: stock.fiftytwo_week_high,
+  fiftytwo_week_low: stock.fiftytwo_week_low,
 });
 
 stockRouter
@@ -23,10 +30,27 @@ stockRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { stock_symbol, stock_values } = req.body;
+    const {
+      stock_symbol,
+      stock_name,
+      stock_open,
+      stock_close,
+      stock_percent_change,
+      stock_previous_close,
+      stock_volume,
+      fiftytwo_week_high,
+      fiftytwo_week_low,
+    } = req.body;
     const newStock = {
       stock_symbol,
-      stock_values,
+      stock_name,
+      stock_open,
+      stock_close,
+      stock_percent_change,
+      stock_previous_close,
+      stock_volume,
+      fiftytwo_week_high,
+      fiftytwo_week_low,
     };
 
     for (const [key, value] of Object.entries(newStock)) {
