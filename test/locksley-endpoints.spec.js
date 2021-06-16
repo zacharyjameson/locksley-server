@@ -144,7 +144,7 @@ describe("Stocks Endpoints", () => {
     });
   });
 
-  describe(`UPDATE /api/stocks/:stock_symbol`, () => {
+  describe(`PATCH /api/stocks/:stock_symbol`, () => {
     context(`Given no stocks in the database`, () => {
       it(`responds with 404`, () => {
         const stockSymbol = 123456;
