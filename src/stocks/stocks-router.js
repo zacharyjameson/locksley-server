@@ -107,6 +107,50 @@ stockRouter
         }
       })
       .catch(next);
+  })
+  .patch(jsonParser, (req, res, next) => {
+    const {
+      stock_symbol,
+      stock_name,
+      stock_open,
+      stock_close,
+      stock_percent_change,
+      stock_previous_close,
+      stock_volume,
+      fiftytwo_week_high,
+      fiftytwo_week_low,
+    } = req.body;
+    const newStock = {
+      stock_symbol,
+      stock_name,
+      stock_open,
+      stock_close,
+      stock_percent_change,
+      stock_previous_close,
+      stock_volume,
+      fiftytwo_week_high,
+      fiftytwo_week_low,
+    };
+
+    const numberOfValues =
+      Object.values(articleToUpdate).filter(Boolean).length;
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either the required fields`,
+        },
+      });
+    }
+
+    StockService.updateStock(
+      req.app.get("db"),
+      req.params.stock_symbol,
+      newStock
+    )
+      .then((numRowsAffected) => {
+        res.status(204).end();
+      })
+      .catch(next);
   });
 
 stockRouter.route("/delete/:stock_symbol");

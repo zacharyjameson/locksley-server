@@ -27,6 +27,10 @@ const StockService = {
   clearAllStocks(knex) {
     return knex.raw("TRUNCATE TABLE locksley_stocks RESTART IDENTITY CASCADE");
   },
+
+  updateStock(knex, symbol, newStock) {
+    return knex('locksley_stocks').where("stock_symbol", symbol).update(newStock);
+  }
 };
 
 module.exports = StockService;
