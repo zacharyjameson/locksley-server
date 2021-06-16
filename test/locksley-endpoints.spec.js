@@ -149,7 +149,7 @@ describe("Stocks Endpoints", () => {
 
     beforeEach("insert stock", () => {
       return db.into("locksley_stocks").insert(oldStock);
-    })
+    });
 
     it(`updates a stock in the database`, () => {
       const newStock = {
@@ -162,16 +162,12 @@ describe("Stocks Endpoints", () => {
         stock_open: "249.98000",
         fiftytwo_week_high: "263.19000",
         fiftytwo_week_low: "184.00999",
-      }
+      };
 
       return supertest(app)
         .patch(`/api/stocks/${newStock.stock_symbol}`)
         .send(newStock)
-        .expect(200)
-        .expect((res) => {
-          expect(res.body.stock_symbol).to.eql(newStock.stock_symbol)
-          expect(res.body.stock_close).to.eql(newStock.stock_close)
-        })
-    })
+        .expect(204);
+    });
   });
 });
