@@ -111,14 +111,6 @@ stockRouter
   .patch(jsonParser, (req, res, next) => {
     const {
       stock_symbol,
-      stock_name,
-      stock_open,
-      stock_close,
-      stock_percent_change,
-      stock_previous_close,
-      stock_volume,
-      fiftytwo_week_high,
-      fiftytwo_week_low,
     } = req.body;
     const newStock = {
       stock_symbol,
