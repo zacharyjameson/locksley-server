@@ -152,7 +152,5 @@ stockRouter
       })
       .catch(next);
   });
-
-stockRouter.route("/delete/:stock_symbol");
-
+  
 module.exports = stockRouter;
