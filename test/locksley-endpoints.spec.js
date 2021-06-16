@@ -143,4 +143,16 @@ describe("Stocks Endpoints", () => {
       });
     });
   });
+
+  describe(`UPDATE /api/stocks/:stock_symbol`, () => {
+    context(`Given no stocks in the database`, () => {
+      it(`responds with 404`, () => {
+        const stockSymbol = 123456;
+
+        return supertest(app)
+          .patch(`/api/stocks/${stockSymbol}`)
+          .expect(404, { error: { message: `Stock doesn't exist.` } });
+      });
+    });
+  });
 });
