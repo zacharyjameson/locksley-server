@@ -145,14 +145,33 @@ describe("Stocks Endpoints", () => {
   });
 
   describe(`PATCH /api/stocks/:stock_symbol`, () => {
-    context(`Given no stocks in the database`, () => {
-      it(`responds with 404`, () => {
-        const stockSymbol = 123456;
+    const oldStock = makeStockArray();
 
-        return supertest(app)
-          .patch(`/api/stocks/${stockSymbol}`)
-          .expect(404, { error: { message: `Stock doesn't exist.` } });
-      });
-    });
+    beforeEach("insert stock", () => {
+      return db.into("locksley_stocks").insert(oldStock);
+    })
+
+    it(`updates a stock in the database`, () => {
+      const newStock = {
+        stock_symbol: "MSFT",
+        stock_name: "Microsoft Corp",
+        stock_volume: "55",
+        stock_previous_close: "250.78999",
+        stock_percent_change: "2.63963",
+        stock_close: "300",
+        stock_open: "249.98000",
+        fiftytwo_week_high: "263.19000",
+        fiftytwo_week_low: "184.00999",
+      }
+
+      return supertest(app)
+        .patch(`/api/stocks/${newStock.stock_symbol}`)
+        .send(newStock)
+        .expect(200)
+        .expect((res) => {
+          expect(res.body.stock_symbol).to.eql(newStock.stock_symbol)
+          expect(res.body.stock_close).to.eql(newStock.stock_close)
+        })
+    })
   });
 });

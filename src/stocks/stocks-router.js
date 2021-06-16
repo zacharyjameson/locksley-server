@@ -133,7 +133,7 @@ stockRouter
     };
 
     const numberOfValues =
-      Object.values(articleToUpdate).filter(Boolean).length;
+      Object.values(newStock).filter(Boolean).length;
     if (numberOfValues === 0) {
       return res.status(400).json({
         error: {
@@ -152,5 +152,5 @@ stockRouter
       })
       .catch(next);
   });
-  
+
 module.exports = stockRouter;
